@@ -73,7 +73,7 @@ public class LaserPointer : OVRCursor
     public override void SetCursorRay(Transform t)
     {
         _startPoint = t.position;
-        _startPoint.z += 0.2f;
+        _startPoint.z += 0.2f;   //前からレーザー出るように変えた　10/12
         _forward = t.forward;
         _hitTarget = false;
     }

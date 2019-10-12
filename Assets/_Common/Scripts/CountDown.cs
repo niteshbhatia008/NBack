@@ -24,7 +24,7 @@ public class CountDown : MonoBehaviour
     [SerializeField, Header("開始音")]
     AudioClip m_startSE;
 
-    [SerializeField, Header("カウントダウンさせる")]
+    [SerializeField, Header("カウントダウンが終わった後の処理をここに登録")]
     UnityEvent m_onStartNBack;
 
     AudioSource m_countDownAudio;
@@ -58,7 +58,6 @@ public class CountDown : MonoBehaviour
                     m_countDownText.text = cnt.ToString();
                     m_countDownText.gameObject.SetActive(true);
                 })
-                .AppendInterval(0.4f)
                 .Join(m_countDownText.DOFade(0, 0.6f))
                 .OnComplete(() =>
                 {
