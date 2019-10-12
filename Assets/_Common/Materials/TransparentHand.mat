@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: My_Transparent
+  m_Name: TransparentHand
   m_Shader: {fileID: 4800000, guid: 4f8b44ea34a13b842a447396b72f7606, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
