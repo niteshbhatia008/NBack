@@ -76,8 +76,8 @@ public class CountDown : MonoBehaviour
         DOTween.Sequence()
                 .OnStart(() =>
                 {
-                    m_countDownAudio.clip = m_startSE;
-                    m_countDownAudio.Play();
+                    //m_countDownAudio.clip = m_startSE;
+                    //m_countDownAudio.Play();
                     m_countDownText.gameObject.SetActive(true);
                 })
                 .Join(m_countDownText.DOFade(0, 1.0f))

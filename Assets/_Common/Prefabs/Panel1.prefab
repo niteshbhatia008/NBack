@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8548576730381706613}
   m_LocalRotation: {x: 0, y: -0.3420201, z: 0, w: 0.9396927}
   m_LocalPosition: {x: -1, y: 0.65, z: 0.5}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.1}
+  m_LocalScale: {x: 0.50000006, y: 0.5, z: 0.10000002}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -109,6 +109,11 @@ MonoBehaviour:
   m_lightPanel: {fileID: 2100000, guid: 3477df3cee042ae46a9a5a45b13f2ff6, type: 2}
   m_correctSE: {fileID: 8300000, guid: 68619d5715125504e8423ad30515217c, type: 3}
   m_wrongSE: {fileID: 8300000, guid: 79a0856fcbed91144aba76f44d5cbdd8, type: 3}
+  m_clearEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!82 &1029526828
 AudioSource:
   m_ObjectHideFlags: 0
