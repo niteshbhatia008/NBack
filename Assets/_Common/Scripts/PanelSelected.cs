@@ -60,8 +60,6 @@ public class PanelSelected : Singleton<PanelSelected>
 
             //選んだオブジェクトをリスト化する
             g_listObj.Add(m_tmpListObj[(int)m_randomValue]);
-            Debug.Log("しょきさくせいりすと：" + m_tmpListObj[(int)m_randomValue].name);
-
         }
 
         //自動で選ばれる処理終わったらパネルを選択可能にする

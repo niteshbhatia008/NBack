@@ -19,10 +19,11 @@ public class PanelSelectedEvent : MonoBehaviour
     [SerializeField, Header("不正解音")]
     AudioClip m_wrongSE;
 
-    [SerializeField, Header("クリア後")]
-    UnityEvent m_clearEvent;
-
     PanelSelected m_panelSelected;
+
+    LevelGetFromSlider m_levelGetFromSlider;
+
+    Clear m_clear;
 
     MeshRenderer m_thisObjMeshRenderer;
     Material m_thisObjMaterial;
@@ -38,19 +39,15 @@ public class PanelSelectedEvent : MonoBehaviour
 
     void Start()
     {
+        m_selectedCount = 0;
+
         //最初に全部取ってきとく
         m_thisObjMeshRenderer = this.gameObject.GetComponent<MeshRenderer>();
         m_thisObjMaterial = m_thisObjMeshRenderer.material;
         m_panelAudio = this.gameObject.GetComponent<AudioSource>();
         m_panelSelected = this.gameObject.GetComponentInParent<PanelSelected>();
-    }
-
-    void Update()
-    {
-        if (m_selectedCount > m_playTime && isDone)//(m_selectedCount > m_playTime + level && isDone)
-        {
-            //ここにクリア時の処理
-        }
+        m_levelGetFromSlider = GameObject.Find("Slider").GetComponent<LevelGetFromSlider>();
+        m_clear = GameObject.Find("ClearCanvas").GetComponent<Clear>();
     }
 
     //選んだものが同じかどうか判定して選択カウント増加
@@ -58,9 +55,6 @@ public class PanelSelectedEvent : MonoBehaviour
     {
         if (m_selectedCount < m_playTime)
         {
-            Debug.Log("りすと：" + m_panelSelected.g_listObj[m_selectedCount].name);
-            Debug.Log("せんたく：" + this.gameObject.name);
-
             if (m_panelSelected.g_listObj[m_selectedCount] == this.gameObject)
             {
                 m_panelSelected.ToNextSelect();
@@ -78,6 +72,12 @@ public class PanelSelectedEvent : MonoBehaviour
             {
                 CorrectSoundPlay();
                 m_selectedCount++;
+
+                if (m_selectedCount == m_playTime + m_levelGetFromSlider.GetLevel())
+                {
+                    //ここにクリア時の処理
+                    m_clear.ClearTextAppear();
+                }
             }
             else
             {

@@ -18,6 +18,9 @@ public class CountDown : MonoBehaviour
     [SerializeField, Header("アニメーション終わりにカウントダウンスタート")]
     Animation m_animation;
 
+    [SerializeField, Header("パネルのアニメーション")]
+    Animator m_panelAnimator;
+
     [SerializeField, Header("カウントダウンの音")]
     AudioClip m_countDownSE;
 
@@ -42,10 +45,13 @@ public class CountDown : MonoBehaviour
 
     IEnumerator CountDownCoroutine()
     {
+        //パネルのアニメーション
+        m_panelAnimator.SetTrigger("Move");
+
         //アニメーション終わるまで待機
         m_animation.Play();
         yield return new WaitWhile(() => m_animation.isPlaying);
-       
+
         int cnt = 3;
 
         while (cnt > 0)

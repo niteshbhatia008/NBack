@@ -66,6 +66,7 @@ public class LaserPointer : OVRCursor
     public override void SetCursorStartDest(Vector3 start, Vector3 dest, Vector3 normal)
     {
         _startPoint = start;
+       // _startPoint.z += 0.2f;   //前からレーザー出るように変えた　10/12
         _endPoint = dest;
         _hitTarget = true;
     }
@@ -73,7 +74,7 @@ public class LaserPointer : OVRCursor
     public override void SetCursorRay(Transform t)
     {
         _startPoint = t.position;
-        _startPoint.z += 0.2f;   //前からレーザー出るように変えた　10/12
+        //_startPoint.z += 0.2f;   //前からレーザー出るように変えた　10/12
         _forward = t.forward;
         _hitTarget = false;
     }
