@@ -9,7 +9,7 @@ using UnityEditor;
 /// ランダムにパネルが選ばれる
 /// パネルの親にアタッチ
 /// </summary>
-public class PanelSelected : Singleton<PanelSelected>
+public class PanelSelected : MonoBehaviour
 {
     [SerializeField,Header("スライダーからレベルを取得")]
     LevelGetFromSlider m_levelGetFromSlider;
