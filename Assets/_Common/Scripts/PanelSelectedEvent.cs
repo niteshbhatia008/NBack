@@ -19,6 +19,9 @@ public class PanelSelectedEvent : MonoBehaviour
     [SerializeField, Header("不正解音")]
     AudioClip m_wrongSE;
 
+    GameObject m_physicsLaser;
+    SelectLaser m_selectLaser;
+
     PanelSelected m_panelSelected;
 
     LevelGetFromSlider m_levelGetFromSlider;
@@ -30,17 +33,18 @@ public class PanelSelectedEvent : MonoBehaviour
 
     AudioSource m_panelAudio;
 
-    float m_blinkInterval = 1;
+    float m_blinkInterval = 0.5f;
     bool isDone;
 
     //何回選ぶか　エンドレスモードがあればここをめちゃくちゃでかい数字に変えればOK
     int m_playTime = 10;
     static int m_selectedCount;
 
-    void Start()
-    {
-        m_selectedCount = 0;
+    //ミスした回数
+    public static int g_missCount{ private set; get; }
 
+     void Awake()
+    {
         //最初に全部取ってきとく
         m_thisObjMeshRenderer = this.gameObject.GetComponent<MeshRenderer>();
         m_thisObjMaterial = m_thisObjMeshRenderer.material;
@@ -48,6 +52,16 @@ public class PanelSelectedEvent : MonoBehaviour
         m_panelSelected = this.gameObject.GetComponentInParent<PanelSelected>();
         m_levelGetFromSlider = GameObject.Find("Slider").GetComponent<LevelGetFromSlider>();
         m_clear = GameObject.Find("ClearCanvas").GetComponent<Clear>();
+        m_physicsLaser = GameObject.Find("PhysicsLaser");
+        m_selectLaser = m_physicsLaser.GetComponent<SelectLaser>();
+    }
+
+    void Start()
+    {
+        m_selectedCount = 0;
+        g_missCount = 0;
+
+        m_physicsLaser.SetActive(false);
     }
 
     //選んだものが同じかどうか判定して選択カウント増加
@@ -64,6 +78,7 @@ public class PanelSelectedEvent : MonoBehaviour
             else
             {
                 WrongSoundPlay();
+                g_missCount++;
             }
         }
         else
@@ -82,6 +97,7 @@ public class PanelSelectedEvent : MonoBehaviour
             else
             {
                 WrongSoundPlay();
+                g_missCount++;
             }
         }
     }
@@ -109,9 +125,10 @@ public class PanelSelectedEvent : MonoBehaviour
     IEnumerator BlinkPanelCoroutine()
     {
         //光が消えるまで操作できないようにするならここにその処理を書く
-
+        m_selectLaser.enabled = false;
         m_thisObjMeshRenderer.material = m_lightPanel;
         yield return new WaitForSeconds(m_blinkInterval);
+        m_selectLaser.enabled = true;
         m_thisObjMeshRenderer.material = m_thisObjMaterial;
     }
 

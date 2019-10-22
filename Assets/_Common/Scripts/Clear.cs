@@ -28,8 +28,6 @@ public class Clear : MonoBehaviour
     [SerializeField, Header("クリア後の処理をここに登録")]
     UnityEvent m_onClear;
 
-  
-
     //クリア時のテキストが出現 パネルのアニメーションも再生
     public void ClearTextAppear()
     {
@@ -50,7 +48,15 @@ public class Clear : MonoBehaviour
         DOTween.Sequence()
             .OnStart(() =>
             {
-                m_clearText.text = "CLEAR!";
+                if(PanelSelectedEvent.g_missCount == 0)
+                {
+                    m_clearText.text = "PERFECT!";
+                }
+                else
+                {
+                    m_clearText.text = @"CLEAR!"+ "\n" + PanelSelectedEvent.g_missCount + " MISTAKE...";
+                }
+
                 m_clearText.gameObject.SetActive(true);
                 m_backButtonImage.gameObject.SetActive(true);
             })
